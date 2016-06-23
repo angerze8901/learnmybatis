@@ -11,7 +11,7 @@ import model.Classes;
 /**
  * @Description:
  * @author:wangze
- * @CreateDate: 2016Äê6ÔÂ23ÈÕ
+ * @CreateDate: 2016ï¿½ï¿½6ï¿½ï¿½23ï¿½ï¿½
  * @version: V1.0
  */
 public class ClassDaoImpl implements ClassDao
@@ -30,7 +30,7 @@ public class ClassDaoImpl implements ClassDao
         ClassDaoImpl classDaoImpl = new ClassDaoImpl();
         Map<String, Object> param = new HashMap<>();
         param.put("c_id", 1);
-        param.put("t_id", 2);
+        //        param.put("t_id", 2);
         List<Classes> listClasses = classDaoImpl.queryClass(param);
         System.out.println(listClasses);
     }

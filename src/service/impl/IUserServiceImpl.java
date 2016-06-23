@@ -11,7 +11,7 @@ import service.IUserService;
 /**
  * @Description:
  * @author:wangze
- * @CreateDate: 2016Äê6ÔÂ22ÈÕ
+ * @CreateDate: 2016ï¿½ï¿½6ï¿½ï¿½22ï¿½ï¿½
  * @version: V1.0
  */
 public class IUserServiceImpl implements IUserService
@@ -33,7 +33,7 @@ public class IUserServiceImpl implements IUserService
     {
         IUserServiceImpl userImpl = new IUserServiceImpl();
         Map<String, Object> param = new HashMap<>();
-        //        param.put("id", 13);
+        param.put("id", 2);
         List<User> listUser = userImpl.queryUserList(param);
         System.out.println(listUser);
     }

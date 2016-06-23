@@ -1,2 +1,4 @@
 eclipse.preferences.version=1
+encoding//src/dao/impl/UserDaoImpl.java=UTF-8
+encoding//src/service/impl/IOrderServiceImpl.java=UTF-8
 encoding/<project>=UTF-8
