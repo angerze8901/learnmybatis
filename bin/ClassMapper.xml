@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<mapper namespace="ClassMapper">
+
+<resultMap id="classMap" Type="Classes">
+<id property="id" column="c_id">
+<result property="name" column="c_name"/>
+<association property="teacher" column="teacher_id" select="getTeacher">
+</association>
+</resultMap>
+
+<select id="getTeacher" parameterType="int" resultType="Teacher">
+select t_id id,t_name name from teacher where t_id=#{t_id}
+</select>
+
+<select id="selectClass" parameterType="int" resultMap="classMap">
+select * from class where c_id=#{c_id}
+</select>
+
+</mapper>
