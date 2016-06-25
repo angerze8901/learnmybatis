@@ -1,9 +1,11 @@
 package model;
 
+import java.util.List;
+
 /**
  * @Description:
  * @author:wangze
- * @CreateDate: 2016Äê6ÔÂ23ÈÕ
+ * @CreateDate: 2016ï¿½ï¿½6ï¿½ï¿½23ï¿½ï¿½
  * @version: V1.0
  */
 public class Classes
@@ -14,12 +16,33 @@ public class Classes
 
     private Teacher teacher;
 
-    public Classes(final int id, final String name, final Teacher teacher)
+    private List<Student> students;
+
+    //    public Classes(final int id, final String name, final Teacher teacher)
+    //    {
+    //        super();
+    //        this.id = id;
+    //        this.name = name;
+    //        this.teacher = teacher;
+    //    }
+
+    public Classes(final int id, final String name, final Teacher teacher, final List<Student> students)
     {
         super();
         this.id = id;
         this.name = name;
         this.teacher = teacher;
+        this.students = students;
+    }
+
+    public List<Student> getStudents()
+    {
+        return students;
+    }
+
+    public void setStudents(final List<Student> students)
+    {
+        this.students = students;
     }
 
     public Classes()
@@ -60,6 +83,6 @@ public class Classes
     @Override
     public String toString()
     {
-        return "Classes [id=" + id + ", name=" + name + ", teacher=" + teacher + "]";
+        return "Classes [id=" + id + ", name=" + name + ", teacher=" + teacher + ", students=" + students + "]";
     }
 }

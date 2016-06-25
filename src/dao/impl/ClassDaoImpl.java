@@ -29,7 +29,7 @@ public class ClassDaoImpl implements ClassDao
     {
         ClassDaoImpl classDaoImpl = new ClassDaoImpl();
         Map<String, Object> param = new HashMap<>();
-        param.put("c_id", 1);
+        param.put("c_id", 2);
         //        param.put("t_id", 2);
         List<Classes> listClasses = classDaoImpl.queryClass(param);
         System.out.println(listClasses);

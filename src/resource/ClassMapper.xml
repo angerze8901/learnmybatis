@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
-<!--联表查询   -->
-<mapper namespace="ClassMapper">
+<!--联表查询class中对应的 teacher  -->
+<!-- <mapper namespace="ClassMapper">
 
 	<resultMap id="classMap" type="Classes">
 	<id property="id" column="c_id"/>
@@ -16,10 +16,32 @@
 	select * from class c,teacher t where c.teacher_id=t.t_id and c.c_id=#{c_id}
 </select>
 
+</mapper> -->
+
+<!-- 联表查询class中对应的 teacher和 student -->
+<!-- <mapper namespace="ClassMapper">
+
+	<resultMap id="classMap" type="Classes">
+	<id property="id" column="c_id"/>
+	<result property="name" column="c_name"/>
+	<association property="teacher" javaType="Teacher">
+	<id property="id" column="t_id"/>
+	<result property="name" column="t_name"/>
+	</association>
+	ofType中指定student集合中的对象类型 
+	<collection property="students" ofType="Student">
+	<id property="id" column="s_id"/>
+	<result property="name" column="s_name"/>
+	</collection>
+	</resultMap>
+	
+<select id="selectClass" parameterType="int" resultMap="classMap">
+	select * from class c, teacher t,student s where c.teacher_id=t.t_id and c.c_id=s.class_id and  c.c_id=#{c_id}
+</select>
+
 </mapper>
-
-
-<!-- 两次查询方式 -->
+ -->
+<!-- 两次查询方式class对应的 teacher -->
 <!-- <mapper namespace="ClassMapper">
 	<resultMap id="classMap" type="Classes">
 		<id property="id" column="c_id"/>
@@ -36,3 +58,27 @@
 	</select>
 
 </mapper> -->
+
+<!--两次查询方式class对应的 teacher和stdent   -->
+<mapper namespace="ClassMapper">
+	<resultMap id="classMap" type="Classes">
+		<id property="id" column="c_id"/>
+		<result property="name" column="c_name"/>
+		<association property="teacher" column="teacher_id" javaType="Teacher" select="getTeacher"/>
+		<collection property="students" ofType="Student" column="c_id" select="getStudent">
+		</collection>
+	</resultMap>
+
+	<select id="getTeacher" parameterType="int" resultType="Teacher">
+		select t_id id,t_name name from teacher where t_id=#{t_id}
+	</select>
+	
+	<select id="getStudent" parameterType="int" resultType="Student">
+		SELECT s_id id, s_name name FROM student WHERE class_id=#{class_id}
+	</select>
+
+	<select id="selectClass" parameterType="int" resultMap="classMap">
+		select * from class where c_id=#{c_id}
+	</select>
+	
+</mapper>
