@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
-<mapper namespace="userMapper"> 
-	<!-- <select id="getid" parameterType="int" 
+<!-- <mapper namespace="userMapper"> 
+	<select id="getid" parameterType="int" 
 		resultType="mybatis.User">
 		select * from users where id=#{id}
-	</select> -->
+	</select>
 	
 	<insert id="insertUser" parameterType="User">
 	insert into users(name, age) values(#{name}, #{age});
@@ -26,4 +26,55 @@
 	select * from users
 	</select>
 	
+</mapper> -->
+
+<!-- 实现多条件查询用户(姓名模糊匹配, 年龄在指定的最小值到最大值之间) -->
+<!-- <mapper namespace="userMapper">
+<select id="selectUser" parameterType="ConditionUser" resultType="User">
+	select * from d_user where
+	<if test='name !="%null%"'>
+			name like #{name}
+	</if>
+	and age between #{minAge} and #{maxAge} 
+</select>
+
+</mapper> -->
+
+<mapper namespace="ISpringUserMapper">
+	<resultMap type="SpringUser" id="userResult">
+		<result column="user_id" property="id"/>
+		<result column="user_name" property="name"/>
+		<result column="user_birthday" property="birthday"/>
+		<result column="user_salary" property="salary"/>
+	</resultMap>
+	
+	<!-- 取的插入数据后的id -->
+	<insert id="save" keyColumn="user_id" keyProperty="id" useGeneratedKeys="true">
+	insert into s_user(user_name,user_birthday,user_salary)
+		values(#{user_name},#{user_birthday},#{user_salary})
+	</insert>
+	
+	<update id="update">
+	update s_user
+		set user_name = #{user_name},
+			user_birthday = #{user_birthday},
+			user_salary = #{user_salary}
+		where user_id = #{user_id}
+	</update>
+	
+	<delete id="delete">
+		delete from s_user
+		where user_id = #{user_id}
+	</delete>
+	
+	<select id="findById" resultMap="userResult">
+		select *
+		from s_user
+		where user_id = #{user_id}
+	</select>
+	
+	<select id="findAll" resultMap="userResult">
+		select * 
+		from s_user
+	</select>
 </mapper>

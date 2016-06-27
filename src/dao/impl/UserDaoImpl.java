@@ -6,12 +6,13 @@ import java.util.Map;
 
 import dao.UserDao;
 import dao.support.MybatisUtil;
+import model.ConditionUser;
 import model.User;
 
 /**
  * @Description:
  * @author:wangze
- * @CreateDate: 2016Äê6ÔÂ22ÈÕ
+ * @CreateDate: 2016ï¿½ï¿½6ï¿½ï¿½22ï¿½ï¿½
  * @version: V1.0
  */
 public class UserDaoImpl implements UserDao
@@ -26,13 +27,30 @@ public class UserDaoImpl implements UserDao
         return MybatisUtil.openSqlSession().selectList(NAME_SPACE, param);
     }
 
-    //main·½Ê½²âÊÔ,×îºÃÑ¡Ôñservice²ã²âÊÔ
+    @Override
+    public List<ConditionUser> queryConditionUserList(final Map<String, Object> param)
+    {
+
+        return MybatisUtil.openSqlSession().selectList(NAME_SPACE, param);
+    }
+
+    //mainï¿½ï¿½Ê½ï¿½ï¿½ï¿½ï¿½,ï¿½ï¿½ï¿½Ñ¡ï¿½ï¿½serviceï¿½ï¿½ï¿½ï¿½ï¿½
     public static void main(final String[] args)
     {
-        UserDaoImpl testuser = new UserDaoImpl();
-        Map<String, Object> param = new HashMap<>();
-        param.put("id", 1);
-        List<User> us = testuser.queryUserList(param);
-        System.out.println(us);
+        //        UserDaoImpl testuser = new UserDaoImpl();
+        //        Map<String, Object> param = new HashMap<>();
+        //        param.put("id", 1);
+        //        List<User> us = testuser.queryUserList(param);
+        //        System.out.println(us);
+
+        UserDaoImpl testuserCon = new UserDaoImpl();
+        Map<String, Object> paramMap = new HashMap<>();
+        //        ConditionUser conUser = new ConditionUser("%o%", 1, 12);
+
+        paramMap.put("name", "%o%");
+        paramMap.put("minAge", 1);
+        paramMap.put("maxAge", 19);
+        List<User> listConditionUser = testuserCon.queryUserList(paramMap);
+        System.out.println(listConditionUser);
     }
 }
